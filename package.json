@@ -2,14 +2,16 @@
   "name": "qiime-view",
   "version": "0.0.1",
   "description": "View QIIME 2 Visualizations on the web!",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "lint:css": "stylelint 'app/**/*.css' --config config/stylelint.yaml",
     "lint:js": "node_modules/eslint/bin/eslint.js app/ config/ --config config/eslint.yaml",
     "lint": "npm run lint:js && npm run lint:css",
     "test": "npm run lint",
     "start": "webpack-dev-server --config config/webpack.dev.config.js --host localhost --port 4242 --inline --hot",
-    "build": "webpack --config config/webpack.prod.config.js"
+    "build": "webpack --config config/webpack.prod.config.js",
+    "build-electron": "webpack --config config/webpack.electron.config.js",
+    "package": "npm run build-electron && electron-packager ./electron-build QIIMEViewer --all --out ~/Desktop/QIIMEViewer --version 1.4.3 --overwrite"
   },
   "repository": {
     "type": "git",
@@ -37,7 +39,10 @@
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.16.0",
+    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.25.0",
+    "electron": "^1.4.3",
+    "electron-packager": "^8.1.0",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.1",
