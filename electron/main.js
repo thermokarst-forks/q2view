@@ -2,17 +2,19 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+const server = require('./server');
+
+
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadURL(`file://${__dirname}/view/index.html`);
-  // TODO: delete the next line
-  mainWindow.webContents.openDevTools();
+  mainWindow = new BrowserWindow({ width: 800, height: 600, icon: __dirname + '/icon.ico' });
+  mainWindow.loadURL(`http://localhost:8125`);
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
 }
+
 app.on('ready', createWindow);
 app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {

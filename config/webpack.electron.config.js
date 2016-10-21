@@ -17,7 +17,7 @@ const extendConfig = require('./webpack.shared');
 module.exports = extendConfig((config) => {
     return {
         output: {
-            path: path.resolve(__dirname, '../electron-build/view'),
+            path: path.resolve(__dirname, '../electron-build'),
             filename: 'js/bundle.js'
         },
         plugins: [...config.plugins,
@@ -27,8 +27,10 @@ module.exports = extendConfig((config) => {
             }),
             new ExtractTextPlugin('css/main.css'),
             new CopyWebpackPlugin([
-                { from: 'electron/main.js', to: '../main.js' },
-                { from: 'package.json', to: '../package.json' },
+                { from: 'electron/main.js', to: 'main.js' },
+                { from: 'electron/server.js', to: 'server.js' },
+                { from: 'electron/icon.ico', to: 'icon.ico' },
+                { from: 'package.json', to: 'package.json' },
             ]),
         ]
     };
